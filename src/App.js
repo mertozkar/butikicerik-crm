@@ -12,10 +12,14 @@ import SignUp from './components/SignUp';
 import Login from './components/Login';
 import { AuthContextProvider, UserAuth } from './context/AuthContext';
 
+
 function App() {
+
+  const { user, logout } = UserAuth();
+
   return (
     <div className="App">
-      <AuthContextProvider>
+      {JSON.parse(localStorage.getItem("userIds")) ? <AuthContextProvider>
         <SiteProvider>
           <Toaster position="top-right" />
           <Navbar />
@@ -28,7 +32,7 @@ function App() {
             </Routes>
           </div>
         </SiteProvider>
-      </AuthContextProvider>
+      </AuthContextProvider> : <Login />}
     </div>
   );
 }

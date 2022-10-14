@@ -42,12 +42,12 @@ const Login = () => {
             <div className="row h-100 align-items-center justify-content-center">
                 <div className="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div className="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
-                        <div className="d-flex align-items-center justify-content-between mb-3">
+                        <div className="d-flex align-items-center justify-content-center mb-3">
                             <a href="index.html" className="">
                                 <h3 className="text-primary"><img src={Logo} width="200" /></h3>
                             </a>
-                            <h3>Giriş Yap</h3>
                         </div>
+                        <h3 className='text-center mb-3'>Giriş Yap</h3>
                         <div className="form-floating mb-3">
                             <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} />
                             <label>E-posta Adresi</label>

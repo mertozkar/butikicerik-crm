@@ -17,7 +17,7 @@ const Navbar = () => {
                     <Link to={"/"} className={classNames({
                         "nav-item nav-link pb-3 pt-3": true,
                         "active": window.location.pathname === "/"
-                    })}  onClick={() => setIsActive("a")}>Ana Sayfa</Link>
+                    })} onClick={() => setIsActive("a")}>Ana Sayfa</Link>
                     <Link to={"/brands"} className={classNames({
                         "nav-item nav-link pb-3 pt-3": true,
                         "active": window.location.pathname === "/brands"

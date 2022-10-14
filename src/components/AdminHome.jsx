@@ -7,40 +7,40 @@ const AdminHome = () => {
       
     return (
         <div className="container-fluid pt-4 px-4">
-            <div class="row g-4 mb-5">
-                <div class="col-sm-6 col-xl-3">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-chart-line fa-3x text-primary"></i>
-                        <div class="ms-3">
-                            <p class="mb-2">300 Kelime Türkçe İçerik</p>
-                            <h6 class="mb-0">$1234</h6>
+            <div className="row g-4 mb-5">
+                <div className="col-sm-6 col-xl-3">
+                    <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i className="fa fa-chart-line fa-3x text-primary"></i>
+                        <div className="ms-3">
+                            <p className="mb-2">300 Kelime Türkçe İçerik</p>
+                            <h6 className="mb-0">$1234</h6>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                        <div class="ms-3">
-                            <p class="mb-2">300 Kelime İngilizce İçerik</p>
-                            <h6 class="mb-0">$1234</h6>
+                <div className="col-sm-6 col-xl-3">
+                    <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i className="fa fa-chart-bar fa-3x text-primary"></i>
+                        <div className="ms-3">
+                            <p className="mb-2">300 Kelime İngilizce İçerik</p>
+                            <h6 className="mb-0">$1234</h6>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-chart-area fa-3x text-primary"></i>
-                        <div class="ms-3">
-                            <p class="mb-2">600 Kelime Türkçe İçerik</p>
-                            <h6 class="mb-0">$1234</h6>
+                <div className="col-sm-6 col-xl-3">
+                    <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i className="fa fa-chart-area fa-3x text-primary"></i>
+                        <div className="ms-3">
+                            <p className="mb-2">600 Kelime Türkçe İçerik</p>
+                            <h6 className="mb-0">$1234</h6>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-chart-area fa-3x text-primary"></i>
-                        <div class="ms-3">
-                            <p class="mb-2">600 Kelime İngilizce İçerik</p>
-                            <h6 class="mb-0">$1234</h6>
+                <div className="col-sm-6 col-xl-3">
+                    <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i className="fa fa-chart-area fa-3x text-primary"></i>
+                        <div className="ms-3">
+                            <p className="mb-2">600 Kelime İngilizce İçerik</p>
+                            <h6 className="mb-0">$1234</h6>
                         </div>
                     </div>
                 </div>
@@ -81,12 +81,12 @@ const AdminHome = () => {
                             {visibleDetail &&
                                 <tr>
                                     <td colSpan={8}>
-                                        <div class="bg-secondary rounded h-100 mb-0">
-                                            <div class="accordion" id="accordionExample">
-                                                <div class="accordion-item bg-transparent">
-                                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                        <div className="bg-secondary rounded h-100 mb-0">
+                                            <div className="accordion" id="accordionExample">
+                                                <div className="accordion-item bg-transparent">
+                                                    <div id="collapseOne" className="accordion-collapse collapse show"
                                                         aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                        <div class="accordion-body">
+                                                        <div className="accordion-body">
                                                             <table className="table text-start align-middle table-bordered table-hover mb-0">
                                                                 <thead>
                                                                     <tr className="text-white">
@@ -177,7 +177,7 @@ const AdminHome = () => {
                     </table>
                 </div>
             </div>
-            <div class="container-fluid pt-4 px-4">
+            <div className="container-fluid pt-4 px-4">
             </div>
         </div>
     )

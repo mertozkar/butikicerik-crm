@@ -37,7 +37,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="ms-3">
-                    <h6 className="mb-0">Jhon Doe</h6> {/* user.name */}
+                    <h6 className="mb-0"> {JSON.parse(localStorage.getItem("userIds"))?.email} </h6> {/* user.name */}
                     <span>Admin</span><br /> {/* user.level */}
                     <Link onClick={() => auth.signOut()}>Çıkış Yap</Link>
                 </div>

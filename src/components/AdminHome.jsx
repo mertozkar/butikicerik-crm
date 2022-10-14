@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { Input } from 'reactstrap'
-import 'https://code.jquery.com/jquery-3.4.1.min.js';
-import 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js';
 
 const AdminHome = () => {
 
     const [visibleDetail, setVisibleDetail] = useState(false)
-
+      
     return (
         <div className="container-fluid pt-4 px-4">
             <div class="row g-4 mb-5">
@@ -80,23 +78,60 @@ const AdminHome = () => {
                                     Detail
                                 </button></td>
                             </tr>
-                            { visibleDetail &&
+                            {visibleDetail &&
                                 <tr>
-                                <td colSpan={8}>
-                                    <div class="bg-secondary rounded h-100 p-4">
-                                        <div class="accordion" id="accordionExample">
-                                            <div class="accordion-item bg-transparent">
-                                                <div id="collapseOne" class="accordion-collapse collapse show"
-                                                    aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        Gubergren justo eos magna eirmod lorem magna, amet dolores ipsum sadipscing ipsum consetetur invidunt et clita diam, vero dolor dolor est eirmod. Rebum accusam amet ipsum et. Et et lorem sanctus amet eos eos elitr ea, sanctus magna et et sed eos sit takimata sadipscing, dolor rebum sed stet vero.
+                                    <td colSpan={8}>
+                                        <div class="bg-secondary rounded h-100 mb-0">
+                                            <div class="accordion" id="accordionExample">
+                                                <div class="accordion-item bg-transparent">
+                                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <table className="table text-start align-middle table-bordered table-hover mb-0">
+                                                                <thead>
+                                                                    <tr className="text-white">
+                                                                        <th scope="col">Başlık</th>
+                                                                        <th scope="col">Yazar</th>
+                                                                        <th scope="col">Editör</th>
+                                                                        <th scope="col">Başlangıç Tarihi</th>
+                                                                        <th scope="col">Bitiş Tarihi</th>
+                                                                        <th scope="col">Durumu</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Başlık1</td>
+                                                                        <td>Yazar1</td>
+                                                                        <td>Editör1</td>
+                                                                        <td>22.10.2022</td>
+                                                                        <td>29.10.2022</td>
+                                                                        <td style={{fontWeight:'bold'}}>Yazarda</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Başlık2</td>
+                                                                        <td>Yazar2</td>
+                                                                        <td>Editör2</td>
+                                                                        <td>22.11.2022</td>
+                                                                        <td>29.11.2022</td>
+                                                                        <td style={{color:'yellow', fontWeight:'bold'}}>Editörde</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Başlık3</td>
+                                                                        <td>Yazar3</td>
+                                                                        <td>Editör3</td>
+                                                                        <td>22.12.2022</td>
+                                                                        <td >29.12.2022</td>
+                                                                        <td style={{color:'green',  fontWeight:'bold'}}>Markada</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr> 
+                                    </td>
+                                </tr>
                             }
                             <tr>
                                 <td>İyibize</td>

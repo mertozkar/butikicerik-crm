@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import UserLogo from '../images/user.jpg';
 import Logo from '../images/butik-icerik-logo-beyaz.png';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 const Navbar = () => {
+    const [isActive, setIsActive] = useState();
+
     return (
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
@@ -10,10 +14,17 @@ const Navbar = () => {
                     <img src={Logo} width="200" />
                 </a>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link active pb-3 pt-3">Ana Sayfa</a>
-                    <a href="index.html" class="nav-item nav-link pb-3 pt-3">Markalar</a>
-                    <a href="index.html" class="nav-item nav-link pb-3 pt-3">Editörler</a>
-                    <a href="index.html" class="nav-item nav-link pb-3 pt-3">Yazarlar</a>
+                    <Link to={"/"} className={classNames({
+                        "nav-item nav-link pb-3 pt-3": true,
+                        "active": window.location.pathname === "/"
+                    })}  onClick={() => setIsActive("a")}>Ana Sayfa</Link>
+                    <Link to={"/brands"} className={classNames({
+                        "nav-item nav-link pb-3 pt-3": true,
+                        "active": window.location.pathname === "/brands"
+                    })} onClick={() => setIsActive("b")}>Markalar</Link>
+                    <Link to={"/"} className="nav-item nav-link  pb-3 pt-3" >Editörler</Link>
+                    <Link to={"/"} className="nav-item nav-link  pb-3 pt-3" >Yazarlar</Link>
+
                 </div>
             </nav>
 
@@ -25,9 +36,9 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div class="ms-3">
-                    <h6 class="mb-0">Jhon Doe</h6>
-                    <span>Admin</span><br />
-                    <a href="">Çıkış Yap</a>
+                    <h6 class="mb-0">Jhon Doe</h6> {/* user.name */}
+                    <span>Admin</span><br /> {/* user.level */}
+                    <a href="">Çıkış Yap</a> {/* logout */}
                 </div>
             </div>
         </div>

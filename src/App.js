@@ -2,18 +2,33 @@ import React from 'react';
 import AdminHome from './components/AdminHome';
 import './styles/style.css';
 import './styles/bootstrap.min.css'
-import { Row } from 'reactstrap';
 import Navbar from './components/Navbar';
 import Brands from './components/Brands';
+import SiteProvider from './context/SiteContext';
+import { Link, Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import { Col, Row } from 'reactstrap';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+import { AuthContextProvider, UserAuth } from './context/AuthContext';
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <div className='content'>
-        <AdminHome />
-        <Brands />
-      </div>
+      <AuthContextProvider>
+        <SiteProvider>
+          <Toaster position="top-right" />
+          <Navbar />
+          <div className='content'>
+            <Routes>
+              <Route path='/login' element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/" element={<AdminHome />} />
+              <Route path="/brands" element={<Brands />} />
+            </Routes>
+          </div>
+        </SiteProvider>
+      </AuthContextProvider>
     </div>
   );
 }

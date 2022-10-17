@@ -14,10 +14,29 @@ const SiteProvider = ({ children }) => {
   const [uid_, setUid_] = useState()
   const [currentCharInfo, setCurrentCharInfo] = useState()
 
+  const [brands, setBrands] = useState([]);
+  const [patSearch, setPatSearch] = useState('');
 
+  useEffect(() => {
+    db.collection("brands").onSnapshot(snapshot => (
+      setBrands(snapshot.docs.map(doc => (
+        {
+          id: doc.id,
+          brandName: doc.data().brandName,
+          contentPcs: doc.data().contentPcs,
+          serviceType: doc.data().serviceType,
+          serviceStart: doc.data().serviceStart,
+          serviceEnd: doc.data().serviceEnd,
+        }
+      )))
+    ))
+  }, []);
 
   const data = {
-
+    brands,
+    setBrands,
+    patSearch,
+    setPatSearch
   }
 
   return (

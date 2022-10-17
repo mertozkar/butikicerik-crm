@@ -3,38 +3,42 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
+import db from '../firebase'
 
 const SignUp = () => {
-
+    const [userLevel, setUserLevel] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const { createUser, signIn } = UserAuth()
     const navigate = useNavigate()
 
+
+
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setError('')
-        try {
-            await createUser(email, password);
-            navigate('/')
-        } catch (e) {
-            setError(e.message)
-            toast.error(error)
+        if (userLevel === "") {
+            toast.error("Kullanıcı tipini seçiniz.");
+        }
+        else {
+            try {
+                const user = await createUser(email, password);
+                db.collection("profile/").doc("profile_" + JSON.parse(localStorage.getItem("userIds"))?.uid).set({
+                    uid: JSON.parse(localStorage.getItem("userIds"))?.uid,
+                    email: JSON.parse(localStorage.getItem("userIds"))?.email,
+                    userLevel: userLevel,
+
+                })
+                navigate('/')
+            } catch (e) {
+                setError(e.message)
+                toast.error(error)
+            }
         }
     }
 
-    const handleSignIn = async (e) => {
-        e.preventDefault()
-        navigate('/')
-        setError('')
-        try {
-            await signIn(email, password)
-        } catch (e) {
-            setError(e.message)
-            toast.error(error)
-        }
-    }
 
 
     return (
@@ -50,17 +54,17 @@ const SignUp = () => {
                         <h3 className='text-center mb-3'>Kayıt Ol</h3>
                         <div className="form-floating mb-3">
                             <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} />
-                            <label for="floatingInput">E-posta Adresi</label>
+                            <label>E-posta Adresi</label>
                         </div>
                         <div className="form-floating mb-4">
                             <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                            <label for="floatingPassword">Parola</label>
+                            <label>Parola</label>
                         </div>
-                        <select className="form-select form-select-lg mb-3" aria-label="Default select example">
-                            <option selected>Kullanıcı Tipi</option>
-                            <option value="1">Yazar</option>
-                            <option value="2">Editör</option>
-                            <option value="3">Admin</option>
+                        <select className="form-select form-select-lg mb-3" aria-label="Default select example" onChange={(e) => setUserLevel(e.target.value)}>
+                            <option value={""} >Kullanıcı Tipi</option>
+                            <option value={"0"}>Yazar</option>
+                            <option value={"1"}>Editör</option>
+                            <option value={"2"}>Admin</option>
                         </select>
                         <button type="submit" className="btn btn-primary py-3 w-100 mb-4" onClick={handleSubmit}>Kayıt Ol</button>
                     </div>

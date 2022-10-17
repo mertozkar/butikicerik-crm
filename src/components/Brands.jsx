@@ -13,6 +13,8 @@ const Brands = () => {
     const [tph_, setTph_] = useState(false)
     const [brandName, setBrandName] = useState()
     const [contentPcs, setContentPcs] = useState()
+    const [wordCount, setWordCount] = useState()
+    const [keyWords, setKeyWords] = useState()
     const [serviceType, setServiceType] = useState()
     const [serviceStart, setServiceStart] = useState()
     const [serviceEnd, setServiceEnd] = useState()
@@ -31,8 +33,11 @@ const Brands = () => {
         } else if (contentPcs <= 0 || brandName === undefined || brandName === null) {
             toast.error("İçerik adedini giriniz.");
             return;
+        } else if (wordCount <= 0 || wordCount === undefined || wordCount === null) {
+            toast.error("İçerik adedini giriniz.");
+            return;
         } else if (serviceType === "") {
-            toast.error("Hzmet tipiniz seçiniz.");
+            toast.error("Hizmet tipiniz seçiniz.");
             return;
         } else if (serviceStart === null || serviceStart === undefined) {
             toast.error("Hizmet başlangıç tarihini seçiniz.");
@@ -46,22 +51,24 @@ const Brands = () => {
         } else {
             if (serviceType === 0) {
                 setServiceType("Blog");
-                console.log("id: " + nanoid() + ", brandName: " + brandName + ", contentPcs: " + contentPcs + ", serviceType: " + serviceType + " , serviceStart: " + serviceStart + ", serviceEnd: " + serviceEnd);
                 setTph_(current => !current)
                 db.collection("brands/").doc(nanoid()).set({
                     brandName: brandName,
                     contentPcs: contentPcs,
+                    wordCount: wordCount,
+                    keyWords: keyWords,
                     serviceType: "Blog",
                     serviceStart: serviceStart,
                     serviceEnd: serviceEnd
                 })
             } else if (serviceType === 1) {
                 setServiceType("Kategori");
-                console.log("id: " + nanoid() + ", brandName: " + brandName + ", contentPcs: " + contentPcs + ", serviceType: " + serviceType + " , serviceStart: " + serviceStart + ", serviceEnd: " + serviceEnd);
                 setTph_(current => !current)
                 db.collection("brands/").doc(nanoid()).set({
                     brandName: brandName,
                     contentPcs: contentPcs,
+                    wordCount: wordCount,
+                    keyWords: keyWords,
                     serviceType: "Kategori",
                     serviceStart: serviceStart,
                     serviceEnd: serviceEnd
@@ -69,11 +76,12 @@ const Brands = () => {
             }
             else {
                 setServiceType("Ürün");
-                console.log("id: " + nanoid() + ", brandName: " + brandName + ", contentPcs: " + contentPcs + ", serviceType: " + serviceType + " , serviceStart: " + serviceStart + ", serviceEnd: " + serviceEnd);
                 setTph_(current => !current)
                 db.collection("brands/").doc(nanoid()).set({
                     brandName: brandName,
                     contentPcs: contentPcs,
+                    wordCount: wordCount,
+                    keyWords: keyWords,
                     serviceType: "Ürün",
                     serviceStart: serviceStart,
                     serviceEnd: serviceEnd
@@ -82,13 +90,6 @@ const Brands = () => {
         }
     }
 
-    const [brandsInfo, setBrandsInfo] = useState([
-        { id: 123456, title: "title1", pcs: 5 },
-        { id: 12663, title: "title2", pcs: 3 },
-        { id: 121233, title: "title3", pcs: 12 },
-        { id: 123653, title: "title4", pcs: 52 },
-
-    ])
     return (
         <>
             <Row xs="1" className="search-bar mt-5">
@@ -124,6 +125,22 @@ const Brands = () => {
                             </Col>
                             <Col xl="8">
                                 <Input type="number" value={contentPcs} onChange={(e) => setContentPcs(e.target.value)}></Input>
+                            </Col>
+                        </Row>
+                        <Row className='mb-3'>
+                            <Col xl="4" className='align-self-center'>
+                                <Label className='mb-0'>Kelime Sayısı:</Label>
+                            </Col>
+                            <Col xl="8">
+                                <Input type="number" value={wordCount} onChange={(e) => setWordCount(e.target.value)}></Input>
+                            </Col>
+                        </Row>
+                        <Row className='mb-3'>
+                            <Col xl="4" className='align-self-center'>
+                                <Label className='mb-0'>Anahtar Kelimeler:</Label>
+                            </Col>
+                            <Col xl="8">
+                                <Input type="textarea" value={keyWords} onChange={(e) => setKeyWords(e.target.value)}></Input>
                             </Col>
                         </Row>
                         <Row className='mb-3'>

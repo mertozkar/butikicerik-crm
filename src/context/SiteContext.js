@@ -16,6 +16,7 @@ const SiteProvider = ({ children }) => {
 
   const [brands, setBrands] = useState([]);
   const [patSearch, setPatSearch] = useState('');
+  const [profile, setProfile] = useState();
 
   useEffect(() => {
     db.collection("brands").onSnapshot(snapshot => (
@@ -31,12 +32,25 @@ const SiteProvider = ({ children }) => {
       )))
     ))
   }, []);
+  useEffect(() => {
+    db.collection("profile/").where("uid", "==", JSON.parse(localStorage.getItem("userIds"))?.uid).onSnapshot(snapshot => (
+      setProfile(snapshot.docs.map(doc => (
+        {
+          uid: doc.data().uid,
+          email: doc.data().email,
+          userLevel: doc.data().userLevel,
+        }
+      )))
+    ))
+  }, []);
 
   const data = {
     brands,
     setBrands,
     patSearch,
-    setPatSearch
+    setPatSearch,
+    profile,
+    setProfile
   }
 
   return (

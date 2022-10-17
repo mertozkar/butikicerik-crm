@@ -4,9 +4,12 @@ import Logo from '../images/butik-icerik-logo-beyaz.png';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { auth } from '../firebase';
+import { useSiteContext } from '../context/SiteContext';
 
 const Navbar = () => {
     const [isActive, setIsActive] = useState();
+
+    const { profile } = useSiteContext();
 
     return (
         <div className="sidebar pe-4 pb-3">
@@ -38,7 +41,10 @@ const Navbar = () => {
                 </div>
                 <div className="ms-3">
                     <h6 className="mb-0"> {JSON.parse(localStorage.getItem("userIds"))?.email} </h6> {/* user.name */}
-                    <span>Admin</span><br /> {/* user.level */}
+                    {
+                        profile && profile[0].userLevel === "0" ? <span>Yazar</span> : profile && profile[0].userLevel === "1" ? <span>Editör</span> : <span>Admin</span>
+                    }
+                    <br /> {/* user.level */}
                     <Link onClick={() => auth.signOut()}>Çıkış Yap</Link>
                 </div>
             </div>

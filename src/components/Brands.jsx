@@ -167,7 +167,7 @@ const Brands = () => {
             </Row>
             <Row>
                 {brands.filter((brands) => brands.brandName.toLowerCase().includes(patSearch)).map((brands, index) => (
-                    <Col>
+                    <Col lg="3">
                         <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4 mt-5">
                             <i className="fa fa-chart-line fa-3x text-primary">logo</i>
                             <div className="ms-3">

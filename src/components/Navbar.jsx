@@ -26,7 +26,7 @@ const Navbar = () => {
                         "nav-item nav-link pb-3 pt-3": true,
                         "active": window.location.pathname === "/brands"
                     })} onClick={() => setIsActive("b")}>Markalar</Link>
-                    <Link to={"/"} className={classNames({
+                    <Link to={"/editors"} className={classNames({
                         "nav-item nav-link pb-3 pt-3": true,
                         "active": window.location.pathname === "/editors"
                     })} onClick={() => setIsActive("c")} >Editörler</Link>

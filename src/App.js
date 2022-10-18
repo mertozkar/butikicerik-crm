@@ -11,6 +11,7 @@ import { Col, Row } from 'reactstrap';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import { AuthContextProvider, UserAuth } from './context/AuthContext';
+import Editors from './components/Editors';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/" element={<AdminHome />} />
               <Route path="/brands" element={<Brands />} />
+              <Route path="/editors" element={<Editors />} />
             </Routes>
           </div>
         </SiteProvider>

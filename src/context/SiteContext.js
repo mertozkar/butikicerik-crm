@@ -8,15 +8,11 @@ export const useSiteContext = () => useContext(SiteContext);
 
 
 const SiteProvider = ({ children }) => {
-  const [playerInfo, setPlayerInfo] = useState()
-  const [charInfo, setCharInfo] = useState()
-  const { user } = UserAuth();
-  const [uid_, setUid_] = useState()
-  const [currentCharInfo, setCurrentCharInfo] = useState()
 
   const [brands, setBrands] = useState([]);
   const [patSearch, setPatSearch] = useState('');
   const [profile, setProfile] = useState();
+  const [editors, setEditors] = useState([]);
 
   useEffect(() => {
     db.collection("brands").onSnapshot(snapshot => (
@@ -43,6 +39,18 @@ const SiteProvider = ({ children }) => {
       )))
     ))
   }, []);
+  useEffect(() => {
+    db.collection("profile/").where("userLevel", "==", "1").onSnapshot(snapshot => (
+      setEditors(snapshot.docs.map(doc => (
+        {
+          email: doc.data().email,
+          uid: doc.data().uid,
+          name: doc.data().name,
+          phone: doc.data().phone
+        }
+      )))
+    ))
+  }, []);
 
   const data = {
     brands,
@@ -50,7 +58,9 @@ const SiteProvider = ({ children }) => {
     patSearch,
     setPatSearch,
     profile,
-    setProfile
+    setProfile,
+    editors,
+    setEditors
   }
 
   return (

@@ -13,7 +13,6 @@ const SiteProvider = ({ children }) => {
   const [patSearch, setPatSearch] = useState('');
   const [profile, setProfile] = useState();
   const [editors, setEditors] = useState([]);
-  const [brandId, setBrandId] = useState();
 
   useEffect(() => {
     db.collection("brands").onSnapshot(snapshot => (
@@ -26,6 +25,7 @@ const SiteProvider = ({ children }) => {
           serviceType: doc.data().serviceType,
           serviceStart: doc.data().serviceStart,
           serviceEnd: doc.data().serviceEnd,
+          imgURL: doc.data().imgURL
         }
       )))
     ))
@@ -63,8 +63,6 @@ const SiteProvider = ({ children }) => {
     setProfile,
     editors,
     setEditors,
-    brandId,
-    setBrandId
   }
 
   return (

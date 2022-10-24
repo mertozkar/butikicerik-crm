@@ -6,11 +6,12 @@ import db from '../firebase';
 import { useSiteContext } from '../context/SiteContext';
 import { Link } from 'react-router-dom';
 import BrandsDetail from './BrandsDetail';
+import defaultLogo from '../images/butik-icerik-logo-beyaz.png'
 
 
 const Brands = () => {
 
-    const { brands, patSearch, setPatSearch, setBrandId, brandId } = useSiteContext()
+    const { brands, patSearch, setPatSearch } = useSiteContext()
 
     const [tph_, setTph_] = useState(false)
     const [brandName, setBrandName] = useState()
@@ -189,11 +190,11 @@ const Brands = () => {
             </Row>
             <Row>
                 {brands.filter((brands) => brands.brandName.toLowerCase().includes(patSearch)).map((brands, index) => (
-                    <Col lg="3">
+                    <Col lg="4" xl="4">
                         <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4 mt-5">
-                            <i className="fa fa-chart-line fa-3x text-primary">logo</i>
+                            <img src={brands.imgURL == "" ? defaultLogo : brands.imgURL} width="auto" height="25" />
                             <div className="ms-3">
-                                <Link to={"/brand-details"} onClick={() => setBrandId(brands.brandId)}><h6 className="mb-2">{brands.brandName}</h6></Link>
+                                <Link to={"/brand-details"} onClick={() => localStorage.setItem("brandId", brands.brandId)}><h6 className="mb-2">{brands.brandName}</h6></Link>
                                 <p className="mb-0">{brands.contentPcs} {brands.serviceType} içeriği</p>
                                 <p className="mb-0">{brands.serviceStart}</p>
                                 <p className="mb-0">{brands.serviceEnd}</p>

@@ -141,7 +141,7 @@ const BrandsDetail = () => {
                                         </div>
                                         </>)}
                                 </>)}
-                                    <Button onClick={uploadLogo} > Logoyu Kaydet </Button></div> : <div><img src={brandDetails && brandDetails[0].imgURL} width="250" /> <Button onClick={deleteLogo}> Logoyu sil </Button></div>}
+                                    <Button onClick={uploadLogo} > Logoyu Kaydet </Button></div> : <div><Button onClick={deleteLogo}> <img src={brandDetails && brandDetails[0].imgURL} width="50" /></Button></div>}
                             </div>
                         </div>
                     </div>

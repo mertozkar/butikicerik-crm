@@ -4,11 +4,13 @@ import { Col, Row, InputGroup, Input, Label } from 'reactstrap';
 import { nanoid } from 'nanoid'
 import db from '../firebase';
 import { useSiteContext } from '../context/SiteContext';
+import { Link } from 'react-router-dom';
+import BrandsDetail from './BrandsDetail';
 
 
 const Brands = () => {
 
-    const { brands, patSearch, setPatSearch } = useSiteContext()
+    const { brands, patSearch, setPatSearch, setBrandId, brandId } = useSiteContext()
 
     const [tph_, setTph_] = useState(false)
     const [brandName, setBrandName] = useState()
@@ -53,6 +55,7 @@ const Brands = () => {
                 setServiceType("Blog");
                 setTph_(current => !current)
                 db.collection("brands/").doc(nanoid()).set({
+                    brandId: nanoid(),
                     brandName: brandName,
                     contentPcs: contentPcs,
                     wordCount: wordCount,
@@ -65,6 +68,7 @@ const Brands = () => {
                 setServiceType("Kategori");
                 setTph_(current => !current)
                 db.collection("brands/").doc(nanoid()).set({
+                    brandId: nanoid(),
                     brandName: brandName,
                     contentPcs: contentPcs,
                     wordCount: wordCount,
@@ -78,6 +82,7 @@ const Brands = () => {
                 setServiceType("Ürün");
                 setTph_(current => !current)
                 db.collection("brands/").doc(nanoid()).set({
+                    brandId: nanoid(),
                     brandName: brandName,
                     contentPcs: contentPcs,
                     wordCount: wordCount,
@@ -188,7 +193,7 @@ const Brands = () => {
                         <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4 mt-5">
                             <i className="fa fa-chart-line fa-3x text-primary">logo</i>
                             <div className="ms-3">
-                                <h6 className="mb-2">{brands.brandName}</h6>
+                                <Link to={"/brand-details"} onClick={() => setBrandId(brands.brandId)}><h6 className="mb-2">{brands.brandName}</h6></Link>
                                 <p className="mb-0">{brands.contentPcs} {brands.serviceType} içeriği</p>
                                 <p className="mb-0">{brands.serviceStart}</p>
                                 <p className="mb-0">{brands.serviceEnd}</p>

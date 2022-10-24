@@ -12,6 +12,7 @@ import SignUp from './components/SignUp';
 import Login from './components/Login';
 import { AuthContextProvider, UserAuth } from './context/AuthContext';
 import Editors from './components/Editors';
+import BrandsDetail from './components/BrandsDetail';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
               <Route path="/" element={<AdminHome />} />
               <Route path="/brands" element={<Brands />} />
               <Route path="/editors" element={<Editors />} />
+              <Route path="/brand-details" element={<BrandsDetail />} />
             </Routes>
           </div>
         </SiteProvider>

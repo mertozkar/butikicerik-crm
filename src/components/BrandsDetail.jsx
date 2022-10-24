@@ -14,6 +14,7 @@ const BrandsDetail = () => {
 
     const [imgURL_, setImgURL_] = useState();
     const [brandDetails, setBrandDetails] = useState();
+    const [titleDetails, setTitleDetails] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const [imageAsset, setImageAsset] = useState(null);
     const [msg, setMsg] = useState(null);
@@ -37,6 +38,28 @@ const BrandsDetail = () => {
                         keyWords: doc.data().keyWords,
                         wordCount: doc.data().wordCount,
                         imgURL: doc.data().imgURL
+                    }
+                )
+                ))
+            ))
+        }
+    }, [])
+
+    useEffect(() => {
+
+
+        if (localStorage.getItem("brandId")) {
+            console.log(localStorage.getItem("brandId"))
+            db.collection("brands/").doc(localStorage.getItem("brandId")).collection("titles").onSnapshot(snapshot => (
+                setTitleDetails(snapshot.docs.map(doc => (
+                    {
+                        id: doc.id,
+                        title: doc.data().title,
+                        author: doc.data().author,
+                        editor: doc.data().editor,
+                        status: doc.data().status,
+                        startDate: doc.data().startDate,
+                        endDate: doc.data().endDate
                     }
                 )
                 ))
@@ -221,34 +244,22 @@ const BrandsDetail = () => {
                                     <th scope="col">Başlık Adı</th>
                                     <th scope="col">Yazar</th>
                                     <th scope="col">Editör</th>
+                                    <th scope="col">Başlangıç Tarihi</th>
+                                    <th scope="col">Bitiş Tarihi</th>
                                     <th scope="col">Durum</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Başlık 1</td>
-                                    <td>Yazar 1</td>
-                                    <td>Editör 1</td>
-                                    <td>Yazarda</td>
-                                </tr>
-                                <tr>
-                                    <td>Başlık 1</td>
-                                    <td>Yazar 1</td>
-                                    <td>Editör 1</td>
-                                    <td>Yazarda</td>
-                                </tr>
-                                <tr>
-                                    <td>Başlık 1</td>
-                                    <td>Yazar 1</td>
-                                    <td>Editör 1</td>
-                                    <td>Yazarda</td>
-                                </tr>
-                                <tr>
-                                    <td>Başlık 1</td>
-                                    <td>Yazar 1</td>
-                                    <td>Editör 1</td>
-                                    <td>Yazarda</td>
-                                </tr>
+                                {titleDetails?.map((title) => (
+                                    <tr>
+                                        <td>{title.title}</td>
+                                        <td>{title.author}</td>
+                                        <td>{title.editor}</td>
+                                        <td>{title.startDate}</td>
+                                        <td>{title.endDate}</td>
+                                        <td>{title.status}</td>
+                                    </tr>
+                                ))}
 
                             </tbody>
                         </table>

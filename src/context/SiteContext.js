@@ -25,6 +25,8 @@ const SiteProvider = ({ children }) => {
           serviceType: doc.data().serviceType,
           serviceStart: doc.data().serviceStart,
           serviceEnd: doc.data().serviceEnd,
+          wordCount: doc.data().wordCount,
+          keyWords: doc.data().keyWords,
           imgURL: doc.data().imgURL
         }
       )))

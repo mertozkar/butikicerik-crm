@@ -29,7 +29,6 @@ const SignUp = () => {
                     uid: JSON.parse(localStorage.getItem("userIds"))?.uid,
                     email: JSON.parse(localStorage.getItem("userIds"))?.email,
                     userLevel: userLevel,
-
                 })
                 navigate('/')
             } catch (e) {
@@ -56,7 +55,7 @@ const SignUp = () => {
                             <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} />
                             <label>E-posta Adresi</label>
                         </div>
-                        <div className="form-floating mb-4">
+                        <div className="form-floating mb-3">
                             <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                             <label>Parola</label>
                         </div>

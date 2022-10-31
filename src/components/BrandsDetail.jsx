@@ -130,6 +130,17 @@ const BrandsDetail = () => {
                 endDate: titleEndDate_,
                 status: selectStatus,
             })
+            db.collection("profile").doc("profile_" + selectAuthor + "/").collection("titles/").doc(nanoid()).set({
+                id: nanoid(),
+                title: title,
+                author: selectAuthor,
+                editor: selectEditor,
+                sortStartDate: titleStart,
+                sortEndDate: titleEnd,
+                startDate: titleStartDate_,
+                endDate: titleEndDate_,
+                status: selectStatus,
+            })
         }
     }
 

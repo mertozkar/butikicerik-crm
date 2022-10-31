@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import brandsLogo from '../images/butik-icerik-logo-beyaz.png'
 import { useSiteContext } from '../context/SiteContext';
-import { Button, Col, Row } from 'reactstrap';
+import { Button, Col, Row, Label, Input } from 'reactstrap';
 import db, { storage } from '../firebase';
 import { deleteObject, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import toast from 'react-hot-toast';
 import Loader from './Loader';
 import { MdCloudUpload, MdDelete } from 'react-icons/md'
+import { nanoid } from 'nanoid'
 
 
 
 const BrandsDetail = () => {
 
+    const { authors, setAuthors, editors } = useSiteContext()
+
     const [imgURL_, setImgURL_] = useState();
+    const [tph_, setTph_] = useState(false)
     const [brandDetails, setBrandDetails] = useState();
     const [titleDetails, setTitleDetails] = useState();
     const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +24,114 @@ const BrandsDetail = () => {
     const [msg, setMsg] = useState(null);
     const [fields, setFields] = useState(false);
     const [alertStatus, setAlertStatus] = useState("danger");
-    const [productImgURL, setProductImgURL] = useState()
+    const [productImgURL, setProductImgURL] = useState();
+    const [title, setTitle] = useState();
+    const [selectAuthor, setSelectAuthor] = useState();
+    const [selectEditor, setSelectEditor] = useState();
+    const [titleStart, setTitleStart] = useState();
+    const [titleEnd, setTitleEnd] = useState();
+    const [selectStatus, setSelectStatus] = useState();
+
+    const addTitlePopup = () => {
+        setTph_(current => !current)
+    }
+
+    const toggleHandle_ = () => {
+        setTph_(current => !current)
+    }
+
+    const year = titleStart?.split("-")[0]
+    const month = titleStart?.split("-")[1]
+    const day = titleStart?.split("-")[2]
+    const year_ = titleEnd?.split("-")[0]
+    const month_ = titleEnd?.split("-")[1]
+    const day_ = titleEnd?.split("-")[2]
+    const titleStartDate_ = day + "." + month + "." + year;
+    const titleEndDate_ = day_ + "." + month_ + "." + year_;
+
+    const addNewTitle = () => {
+
+
+        if (title === "" || title === undefined || title === null) {
+            toast.error("Başlık giriniz.");
+            return;
+        } else if (selectAuthor === "") {
+            toast.error("Yazar seçiniz.");
+            return;
+        } else if (selectEditor === "") {
+            toast.error("Editör seçiniz.");
+            return;
+        } else if (titleStart === null || titleStart === undefined) {
+            toast.error("Başlangıç tarihini seçiniz.");
+            return;
+        } else if (titleEnd === null || titleEnd === undefined) {
+            toast.error("Bitiş tarihini seçiniz.");
+            return;
+        } else if (titleStart > titleEnd) {
+            toast.error("Başlagıç ve bitiş tarihini kontrol ediniz.");
+            return;
+        } else if (selectStatus === "") {
+            toast.error("Başlık durumunu seçiniz.");
+            return;
+        } else {
+
+            // var author_
+            // var editor_
+            // var status_
+            // if (selectAuthor == "0") {
+            //     author_ = "Mert Özkar"
+            // } else if (selectAuthor == "1") {
+            //     author_ = "Yiğitcan Derya"
+            // } else if (selectAuthor == "2") {
+            //     author_ = "Serhat Dalgalıdere"
+            // } else {
+            //     toast.error("Yazar seçiniz.")
+            // }
+            // if (selectEditor == "0") {
+            //     editor_ = "Mert Özkar"
+            // } else if (selectEditor == "1") {
+            //     editor_ = "Yiğitcan Derya"
+            // } else if (selectEditor == "2") {
+            //     editor_ = "Serhat Dalgalıdere"
+            // } else {
+            //     toast.error("Editör seçiniz.")
+            // }
+            // if (selectStatus == "0") {
+            //     status_ = "Yazar"
+            // } else if (selectStatus == "1") {
+            //     status_ = "Editör"
+            // } else if (selectStatus == "2") {
+            //     status_ = "Marka"
+            // } else if (selectStatus == "3") {
+            //     status_ = "Yayın"
+            // } else {
+            //     toast.error("Başlık durumunu seçiniz.")
+            // }
+            setTph_(current => !current)
+            db.collection("brands").doc(localStorage.getItem("brandId")).collection("titles").doc(nanoid()).set({
+                id: nanoid(),
+                title: title,
+                author: selectAuthor,
+                editor: selectEditor,
+                sortStartDate: titleStart,
+                sortEndDate: titleEnd,
+                startDate: titleStartDate_,
+                endDate: titleEndDate_,
+                status: selectStatus,
+            })
+            db.collection("profile").doc("profile_" + selectEditor + "/").collection("titles/").doc(nanoid()).set({
+                id: nanoid(),
+                title: title,
+                author: selectAuthor,
+                editor: selectEditor,
+                sortStartDate: titleStart,
+                sortEndDate: titleEnd,
+                startDate: titleStartDate_,
+                endDate: titleEndDate_,
+                status: selectStatus,
+            })
+        }
+    }
 
     useEffect(() => {
 
@@ -234,8 +345,88 @@ const BrandsDetail = () => {
                             <h6 className="mb-0">Ekim Ayı Başlıkları</h6>
                         </Col>
                         <Col lg="6" className='text-end'>
-                            <button type="button" className="btn btn-primary m-2">Yeni Marka <b>+</b></button>
+                            <button type="button" className="btn btn-primary m-2" onClick={addTitlePopup}>Başlık Ekle <b>+</b></button>
                         </Col>
+                        {tph_ && <div className="popup-box">
+                            <div className="box">
+                                <span className="close-icon" onClick={toggleHandle_}>x</span>
+                                <Row className='mb-3'>
+                                    <Col className='align-self-center text-center'>
+                                        <h3 className='mb-0'>Başlık Ekle</h3>
+                                        <hr />
+                                    </Col>
+                                </Row>
+                                <Row className='mb-3'>
+                                    <Col xl="4" className='align-self-center text-start'>
+                                        <Label className='mb-0'>Başlık:</Label>
+                                    </Col>
+                                    <Col xl="8">
+                                        <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></Input>
+                                    </Col>
+                                </Row>
+                                <Row className='mb-3'>
+                                    <Col xl="4" className='align-self-center text-start'>
+                                        <Label className='mb-0'>Yazar:</Label>
+                                    </Col>
+                                    <Col xl="8">
+                                        <select className="form-select" aria-label="Default select example" onChange={(e) => setSelectAuthor(e.target.value)}>
+                                            <option value={""} >Yazar Seçiniz</option>
+                                            {authors?.map((authors, index) => (
+                                                <option value={authors.uid}>{authors.name}</option>
+                                            ))}
+                                        </select>
+                                    </Col>
+                                </Row>
+                                <Row className='mb-3'>
+                                    <Col xl="4" className='align-self-center text-start'>
+                                        <Label className='mb-0'>Editör:</Label>
+                                    </Col>
+                                    <Col xl="8">
+                                        <select className="form-select" aria-label="Default select example" onChange={(e) => setSelectEditor(e.target.value)}>
+                                            <option value={""} >Editör Seçiniz</option>
+                                            {editors?.map((editors, index) => (
+                                                <option value={editors.uid}>{editors.name}</option>
+                                            ))}
+                                        </select>
+                                    </Col>
+                                </Row>
+                                <Row className='mb-3'>
+                                    <Col xl="4" className='align-self-center text-start'>
+                                        <Label className='mb-0'>Başlık Başlangıcı:</Label>
+                                    </Col>
+                                    <Col xl="8">
+                                        <Input type="date" value={titleStart} onChange={(e) => setTitleStart(e.target.value)}></Input>
+                                    </Col>
+                                </Row>
+                                <Row className='mb-3'>
+                                    <Col xl="4" className='align-self-center text-start'>
+                                        <Label className='mb-0'>Başlık Bitişi:</Label>
+                                    </Col>
+                                    <Col xl="8">
+                                        <Input type="date" value={titleEnd} onChange={(e) => setTitleEnd(e.target.value)}></Input>
+                                    </Col>
+                                </Row>
+                                <Row className='mb-3'>
+                                    <Col xl="4" className='align-self-center text-start'>
+                                        <Label className='mb-0'>Başlık Durumu:</Label>
+                                    </Col>
+                                    <Col xl="8">
+                                        <select className="form-select" aria-label="Default select example" onChange={(e) => setSelectStatus(e.target.value)}>
+                                            <option value={""} >Durum Seçiniz</option>
+                                            <option value={"Yazar"}>Yazar</option>
+                                            <option value={"Editör"}>Editör</option>
+                                            <option value={"Marka"}>Marka</option>
+                                            <option value={"Yayın"}>Yayın</option>
+                                        </select>
+                                    </Col>
+                                </Row>
+                                <Row className='justify-content-center'>
+                                    <Col xl="6" className='text-center'>
+                                        <button type="button" className="btn btn-primary m-2" onClick={addNewTitle}>Yeni Başlık Ekle</button>
+                                    </Col>
+                                </Row>
+                            </div>
+                        </div>}
                     </Row>
                     <div className="table-responsive">
                         <table className="table text-start align-middle table-bordered table-hover mb-0">
@@ -251,7 +442,7 @@ const BrandsDetail = () => {
                             </thead>
                             <tbody>
                                 {titleDetails?.map((title) => (
-                                    <tr>
+                                    <tr key={title.id}>
                                         <td>{title.title}</td>
                                         <td>{title.author}</td>
                                         <td>{title.editor}</td>

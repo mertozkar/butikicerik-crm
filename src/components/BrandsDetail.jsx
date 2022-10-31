@@ -111,30 +111,30 @@ const BrandsDetail = () => {
             db.collection("brands").doc(localStorage.getItem("brandId")).collection("titles").doc(nanoid()).set({
                 id: nanoid(),
                 title: title,
-                author: selectAuthor,
-                editor: selectEditor,
+                author: JSON.parse(selectAuthor).name,
+                editor: JSON.parse(selectEditor).name,
                 sortStartDate: titleStart,
                 sortEndDate: titleEnd,
                 startDate: titleStartDate_,
                 endDate: titleEndDate_,
                 status: selectStatus,
             })
-            db.collection("profile").doc("profile_" + selectEditor + "/").collection("titles/").doc(nanoid()).set({
+            db.collection("profile").doc("profile_" + JSON.parse(selectEditor).uid + "/").collection("titles/").doc(nanoid()).set({
                 id: nanoid(),
                 title: title,
-                author: selectAuthor,
-                editor: selectEditor,
+                author: JSON.parse(selectAuthor).name,
+                editor: JSON.parse(selectEditor).name,
                 sortStartDate: titleStart,
                 sortEndDate: titleEnd,
                 startDate: titleStartDate_,
                 endDate: titleEndDate_,
                 status: selectStatus,
             })
-            db.collection("profile").doc("profile_" + selectAuthor + "/").collection("titles/").doc(nanoid()).set({
+            db.collection("profile").doc("profile_" + JSON.parse(selectAuthor).uid + "/").collection("titles/").doc(nanoid()).set({
                 id: nanoid(),
                 title: title,
-                author: selectAuthor,
-                editor: selectEditor,
+                author: JSON.parse(selectAuthor).name,
+                editor: JSON.parse(selectEditor).name,
                 sortStartDate: titleStart,
                 sortEndDate: titleEnd,
                 startDate: titleStartDate_,
@@ -383,7 +383,7 @@ const BrandsDetail = () => {
                                         <select className="form-select" aria-label="Default select example" onChange={(e) => setSelectAuthor(e.target.value)}>
                                             <option value={""} >Yazar Seçiniz</option>
                                             {authors?.map((authors, index) => (
-                                                <option value={authors.uid}>{authors.name}</option>
+                                                <option value={JSON.stringify(authors)}>{authors.name}</option>
                                             ))}
                                         </select>
                                     </Col>
@@ -395,8 +395,8 @@ const BrandsDetail = () => {
                                     <Col xl="8">
                                         <select className="form-select" aria-label="Default select example" onChange={(e) => setSelectEditor(e.target.value)}>
                                             <option value={""} >Editör Seçiniz</option>
-                                            {editors?.map((editors, index) => (
-                                                <option value={editors.uid}>{editors.name}</option>
+                                            {editors?.map((editor, index) => (
+                                                <option value={JSON.stringify(editor)}>{editor.name}</option>
                                             ))}
                                         </select>
                                     </Col>

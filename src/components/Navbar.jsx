@@ -14,9 +14,9 @@ const Navbar = () => {
     return (
         <div className="sidebar pe-4 pb-3">
             <nav className="navbar bg-secondary navbar-dark">
-                <a href="index.html" className="navbar-brand mx-4 mb-3">
+                <div className="navbar-brand mx-4 mb-3">
                     <img src={Logo} width="200" />
-                </a>
+                </div>
                 <div className="navbar-nav w-100">
                     <Link to={"/"} className={classNames({
                         "nav-item nav-link pb-3 pt-3": true,

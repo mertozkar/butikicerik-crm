@@ -34,17 +34,21 @@ const SiteProvider = ({ children }) => {
     ))
   }, []);
   useEffect(() => {
-    db.collection("profile/").where("uid", "==", JSON.parse(localStorage.getItem("userIds"))?.uid).onSnapshot(snapshot => (
-      setProfile(snapshot.docs.map(doc => (
-        {
-          uid: doc.data().uid,
-          email: doc.data().email,
-          userLevel: doc.data().userLevel,
-        }
-      )))
-    ))
+    if (JSON.parse(localStorage.getItem("userIds"))?.uid) {
+      db.collection("profile/").where("uid", "==", JSON.parse(localStorage.getItem("userIds"))?.uid).onSnapshot(snapshot => (
+        setProfile(snapshot.docs.map(doc => (
+          {
+            uid: doc.data().uid,
+            email: doc.data().email,
+            userLevel: doc.data().userLevel,
+          }
+        )))
+      ))
+    }
+
   }, []);
   useEffect(() => {
+
     db.collection("profile/").where("userLevel", "==", "1").onSnapshot(snapshot => (
       setEditors(snapshot.docs.map(doc => (
         {
@@ -55,8 +59,10 @@ const SiteProvider = ({ children }) => {
         }
       )))
     ))
+
   }, []);
   useEffect(() => {
+
     db.collection("profile/").where("userLevel", "==", "0").onSnapshot(snapshot => (
       setAuthors(snapshot.docs.map(doc => (
         {
@@ -67,6 +73,8 @@ const SiteProvider = ({ children }) => {
         }
       )))
     ))
+
+
   }, []);
 
   const data = {

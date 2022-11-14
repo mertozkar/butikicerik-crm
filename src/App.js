@@ -14,6 +14,7 @@ import { AuthContextProvider, UserAuth } from './context/AuthContext';
 import Editors from './components/Editors';
 import BrandsDetail from './components/BrandsDetail';
 import EditorDetail from './components/EditorDetail';
+import Customer from './components/Customer';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/" element={<AdminHome />} />
               <Route path="/brands" element={<Brands />} />
+              <Route path="/customer" element={<Customer />} />
               <Route path="/editors" element={<Editors />} />
               <Route path="/brand-details" element={<BrandsDetail />} />
               <Route path='/editor-details' element={<EditorDetail />} />

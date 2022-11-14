@@ -122,6 +122,19 @@ const Brands = () => {
                                 <Label className='mb-0'>Marka Adı:</Label>
                             </Col>
                             <Col xl="8">
+                                <select className="form-select" aria-label="Default select example" onChange={(e) => setServiceType(e.target.value)}>
+                                    <option value={""} >Marka Adı</option>
+                                    <option value={"0"}>Blog</option>
+                                    <option value={"1"}>Kategori</option>
+                                    <option value={"2"}>Ürün</option>
+                                </select>
+                            </Col>
+                        </Row>
+                        <Row className='mb-3'>
+                            <Col xl="4" className='align-self-center'>
+                                <Label className='mb-0'>Marka Adı:</Label>
+                            </Col>
+                            <Col xl="8">
                                 <Input type="text" value={brandName} onChange={(e) => setBrandName(e.target.value)}></Input>
                             </Col>
                         </Row>

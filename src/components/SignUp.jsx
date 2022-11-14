@@ -64,6 +64,7 @@ const SignUp = () => {
                             <option value={"0"}>Yazar</option>
                             <option value={"1"}>Editör</option>
                             <option value={"2"}>Admin</option>
+                            <option value={"3"}>Marka</option>
                         </select>
                         <button type="submit" className="btn btn-primary py-3 w-100 mb-4" onClick={handleSubmit}>Kayıt Ol</button>
                     </div>

@@ -338,3 +338,15 @@
 }
 
 /* Popup style End */
+
+.delete-button {
+    background-color: #EB1616 !important;
+    border-radius: 50px;
+    color: #fff;
+    display: flex;
+    text-align: center;
+    margin: 8px;
+    padding-top: 0px;
+    max-width: 25px !important;
+    max-height: 25px !important;
+}

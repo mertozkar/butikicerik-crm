@@ -14,6 +14,7 @@ const SiteProvider = ({ children }) => {
   const [profile, setProfile] = useState();
   const [editors, setEditors] = useState([]);
   const [authors, setAuthors] = useState([]);
+  const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
     db.collection("brands").onSnapshot(snapshot => (
@@ -76,6 +77,18 @@ const SiteProvider = ({ children }) => {
 
 
   }, []);
+  useEffect(() => {
+    db.collection("profile/").where("userLevel", "==", "3").onSnapshot(snapshot => (
+      setCustomers(snapshot.docs.map(doc => (
+        {
+          email: doc.data().email,
+          uid: doc.data().uid,
+          name: doc.data().name,
+          phone: doc.data().phone
+        }
+      )))
+    ))
+  }, [])
 
   const data = {
     brands,

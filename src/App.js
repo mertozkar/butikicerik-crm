@@ -13,6 +13,7 @@ import Login from './components/Login';
 import { AuthContextProvider, UserAuth } from './context/AuthContext';
 import Editors from './components/Editors';
 import BrandsDetail from './components/BrandsDetail';
+import EditorDetail from './components/EditorDetail';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               <Route path="/brands" element={<Brands />} />
               <Route path="/editors" element={<Editors />} />
               <Route path="/brand-details" element={<BrandsDetail />} />
+              <Route path='/editor-details' element={<EditorDetail />} />
             </Routes>
           </div>
         </SiteProvider>

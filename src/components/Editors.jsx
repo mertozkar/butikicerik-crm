@@ -5,6 +5,7 @@ import { nanoid } from 'nanoid'
 import db from '../firebase';
 import { useSiteContext } from '../context/SiteContext';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Editors = () => {
     const { patSearch, setPatSearch, editors } = useSiteContext()
@@ -38,11 +39,12 @@ const Editors = () => {
             </Row>
             <Row>
                 {editors.filter((editors) => editors.email.toLowerCase().includes(patSearch)).map((editors, index) => (
-                    <Col lg="3" key={editors.uid}>
+                    <Col lg="4" md="6" sm="6" xs="6" key={editors.uid}>
                         <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4 mt-5">
-                            <i className="fa fa-chart-line fa-3x text-primary">logo</i>
+                            <Link to={"/editor-details"} onClick={() => localStorage.setItem("editorId", editors.uid)}><i className="fa fa-chart-line fa-3x text-primary">{editors.name}</i></Link>
                             <div className="ms-3">
                                 <h6 className="mb-2">{editors.email}</h6>
+                                <h6 className="mb-2">{editors.phone}</h6>
                             </div>
                         </div>
                     </Col>

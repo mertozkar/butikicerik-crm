@@ -9,9 +9,7 @@ import Loader from './Loader';
 import { MdCloudUpload, MdDelete } from 'react-icons/md'
 import { nanoid } from 'nanoid'
 
-
-
-const BrandsDetail = () => {
+const EditorDetail = () => {
 
     const { authors, setAuthors, editors } = useSiteContext()
 
@@ -259,8 +257,6 @@ const BrandsDetail = () => {
     }
 
 
-
-
     return (
         <>
             <div className="container-fluid pt-4 px-4">
@@ -460,7 +456,6 @@ const BrandsDetail = () => {
                                         <td>{title.startDate}</td>
                                         <td>{title.endDate}</td>
                                         <td>{title.status}</td>
-                                        <td className='delete-button'>-</td>
                                     </tr>
                                 ))}
 
@@ -473,4 +468,4 @@ const BrandsDetail = () => {
     )
 }
 
-export default BrandsDetail
+export default EditorDetail

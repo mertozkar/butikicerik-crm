@@ -101,6 +101,8 @@ const SiteProvider = ({ children }) => {
     setEditors,
     authors,
     setAuthors,
+    customers,
+    setCustomers,
   }
 
   return (

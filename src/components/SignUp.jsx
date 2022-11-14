@@ -8,6 +8,8 @@ import db from '../firebase'
 const SignUp = () => {
     const [userLevel, setUserLevel] = useState('')
     const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
+    const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const { createUser, signIn } = UserAuth()
@@ -28,6 +30,8 @@ const SignUp = () => {
                 db.collection("profile/").doc("profile_" + JSON.parse(localStorage.getItem("userIds"))?.uid).set({
                     uid: JSON.parse(localStorage.getItem("userIds"))?.uid,
                     email: JSON.parse(localStorage.getItem("userIds"))?.email,
+                    name: name,
+                    phone: phone,
                     userLevel: userLevel,
                 })
                 navigate('/')
@@ -52,8 +56,16 @@ const SignUp = () => {
                         </div>
                         <h3 className='text-center mb-3'>Kayıt Ol</h3>
                         <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="floatingInput" placeholder="Example Name" onChange={(e) => setName(e.target.value)} />
+                            <label>İsim Soyisim</label>
+                        </div>
+                        <div className="form-floating mb-3">
                             <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} />
                             <label>E-posta Adresi</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="phone" className="form-control" id="floatingInput" placeholder="05-- --- -- --" onChange={(e) => setPhone(e.target.value)} />
+                            <label>Telefon</label>
                         </div>
                         <div className="form-floating mb-3">
                             <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />

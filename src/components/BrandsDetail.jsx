@@ -16,6 +16,7 @@ const BrandsDetail = () => {
     const { authors, setAuthors, editors } = useSiteContext()
 
     const [imgURL_, setImgURL_] = useState();
+    const [tph, setTph] = useState(false);
     const [tph_, setTph_] = useState(false)
     const [brandDetails, setBrandDetails] = useState();
     const [titleDetails, setTitleDetails] = useState();
@@ -31,6 +32,19 @@ const BrandsDetail = () => {
     const [titleStart, setTitleStart] = useState();
     const [titleEnd, setTitleEnd] = useState();
     const [selectStatus, setSelectStatus] = useState();
+
+    const removeTitleFromDb = () => {
+        setTph(current => !current)
+    }
+
+    const toggleHandle = () => {
+        setTph(current => !current)
+    }
+
+    const removeTitleFromDb_ = (id) => {
+        console.log(localStorage.getItem("brandId") + " " + id)
+        //db.collection("brands/").doc(localStorage.getItem("brandId")).collection("titles/").doc(id).delete();
+    }
 
     const addTitlePopup = () => {
         setTph_(current => !current)
@@ -74,39 +88,6 @@ const BrandsDetail = () => {
             toast.error("Başlık durumunu seçiniz.");
             return;
         } else {
-
-            // var author_
-            // var editor_
-            // var status_
-            // if (selectAuthor == "0") {
-            //     author_ = "Mert Özkar"
-            // } else if (selectAuthor == "1") {
-            //     author_ = "Yiğitcan Derya"
-            // } else if (selectAuthor == "2") {
-            //     author_ = "Serhat Dalgalıdere"
-            // } else {
-            //     toast.error("Yazar seçiniz.")
-            // }
-            // if (selectEditor == "0") {
-            //     editor_ = "Mert Özkar"
-            // } else if (selectEditor == "1") {
-            //     editor_ = "Yiğitcan Derya"
-            // } else if (selectEditor == "2") {
-            //     editor_ = "Serhat Dalgalıdere"
-            // } else {
-            //     toast.error("Editör seçiniz.")
-            // }
-            // if (selectStatus == "0") {
-            //     status_ = "Yazar"
-            // } else if (selectStatus == "1") {
-            //     status_ = "Editör"
-            // } else if (selectStatus == "2") {
-            //     status_ = "Marka"
-            // } else if (selectStatus == "3") {
-            //     status_ = "Yayın"
-            // } else {
-            //     toast.error("Başlık durumunu seçiniz.")
-            // }
             setTph_(current => !current)
             db.collection("brands").doc(localStorage.getItem("brandId")).collection("titles").doc(nanoid()).set({
                 id: nanoid(),
@@ -453,14 +434,43 @@ const BrandsDetail = () => {
                             </thead>
                             <tbody>
                                 {titleDetails?.map((title) => (
-                                    <tr key={title.id}>
+                                    <tr key={title.id} className="brand-title-table">
                                         <td>{title.title}</td>
                                         <td>{title.author}</td>
                                         <td>{title.editor}</td>
                                         <td>{title.startDate}</td>
                                         <td>{title.endDate}</td>
                                         <td>{title.status}</td>
-                                        <td className='delete-button'>-</td>
+                                        <td><button type="button" class="btn btn-danger m-2" onClick={removeTitleFromDb}>Sil</button></td>
+                                        {tph && <div className="popup-box">
+                                            <div className="box">
+                                                <span className="close-icon" onClick={toggleHandle}>x</span>
+                                                <Row className="product-name"> Başlığı silmek istediğinize emin misiniz?</Row>
+                                                <Row>
+                                                    <Col>
+                                                        <Button
+                                                            color="success"
+                                                            outline
+                                                            className="float-end"
+                                                            onClick={removeTitleFromDb_(title.id)}
+                                                        >
+                                                            Sil
+                                                        </Button>
+                                                    </Col>
+                                                    <Col>
+                                                        <Button
+                                                            color="danger"
+                                                            outline
+                                                            onClick={toggleHandle}
+                                                        >
+                                                            İptal
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
+
+                                            </div>
+                                        </div>}
+                                        <td><button type="button" class="btn btn-warning m-2">Güncelle</button></td>
                                     </tr>
                                 ))}
 

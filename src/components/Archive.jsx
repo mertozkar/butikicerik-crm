@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Row, Col, InputGroup, Input } from 'reactstrap'
 import { useSiteContext } from '../context/SiteContext'
 
-const Archieve = () => {
+const Archive = () => {
 
     const { patSearch, setPatSearch } = useSiteContext()
 
@@ -89,4 +89,4 @@ const Archieve = () => {
     )
 }
 
-export default Archieve
+export default Archive

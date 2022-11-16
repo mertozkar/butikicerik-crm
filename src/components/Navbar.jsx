@@ -45,7 +45,7 @@ const Navbar = () => {
                 <div className="ms-3">
                     <h6 className="mb-0"> {JSON.parse(localStorage.getItem("userIds"))?.email} </h6> {/* user.name */}
                     {
-                        profile && profile[0].userLevel === "0" ? <span>Yazar</span> : profile && profile[0].userLevel === "1" ? <span>Editör</span> : <span>Admin</span>
+                        profile && profile[0].userLevel === "0" ? <span>Yazar</span> : profile && profile[0].userLevel === "1" ? <span>Editör</span> : profile && profile[0].userLevel === "3" ? <span>Marka</span> : <span>Admin</span>
                     }
                     <br /> {/* user.level */}
                     <Link onClick={() => auth.signOut()}>Çıkış Yap</Link>

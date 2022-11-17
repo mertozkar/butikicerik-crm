@@ -444,7 +444,7 @@ const BrandsDetail = () => {
                                         <td>{title.startDate}</td>
                                         <td>{title.endDate}</td>
                                         <td>{title.status}</td>
-                                        <td><button type="button" class="btn btn-danger m-2" onClick={(e) => removeTitleFromDb(title.id)}>Sil</button></td>
+                                        <td><button type="button" className="btn btn-danger m-2" onClick={(e) => removeTitleFromDb(title.id)}>Sil</button></td>
                                         {tph && <div className="popup-box">
                                             <div className="box">
                                                 <span className="close-icon" onClick={toggleHandle}>x</span>
@@ -473,7 +473,7 @@ const BrandsDetail = () => {
 
                                             </div>
                                         </div>}
-                                        <td><button type="button" class="btn btn-warning m-2">Güncelle</button></td>
+                                        <td><button type="button" className="btn btn-warning m-2">Güncelle</button></td>
                                     </tr>
                                 ))}
 

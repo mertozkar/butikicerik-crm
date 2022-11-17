@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import Loader from './Loader';
 import { MdCloudUpload, MdDelete } from 'react-icons/md'
 import { nanoid } from 'nanoid'
+import BrandTitle from './BrandTitle';
 
 
 
@@ -437,6 +438,7 @@ const BrandsDetail = () => {
                             </thead>
                             <tbody>
                                 {titleDetails?.map((title) => (
+<<<<<<< HEAD
                                     <tr key={title.id} className="brand-title-table">
                                         <td>{title.title}</td>
                                         <td>{title.author}</td>
@@ -475,6 +477,9 @@ const BrandsDetail = () => {
                                         </div>}
                                         <td><button type="button" className="btn btn-warning m-2">Güncelle</button></td>
                                     </tr>
+=======
+                                    <BrandTitle />
+>>>>>>> c03a150a606ff49c1ad078b4eb817f9b6ff0602b
                                 ))}
 
                             </tbody>

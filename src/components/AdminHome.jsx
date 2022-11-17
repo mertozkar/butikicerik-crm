@@ -16,8 +16,6 @@ const AdminHome = () => {
                     <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                         <i className="fa fa-chart-line fa-3x text-primary"></i>
                         <div className="ms-3">
-                            <p className="mb-2">300 Kelime Türkçe İçerik</p>
-                            <h6 className="mb-0">$1234</h6>
                         </div>
                     </div>
                 </div>

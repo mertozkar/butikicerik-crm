@@ -4,15 +4,11 @@ import { useSiteContext } from '../context/SiteContext'
 
 const Archive = () => {
 
-    const { patSearch, setPatSearch } = useSiteContext()
+    const { patSearch, setPatSearch, dummyContents } = useSiteContext()
 
     const [date_value, setDate_value] = useState("0");
 
-    const dummyContents = [
-        { title: "Mineraller neden bu kadar önemli?", startDate: "12.11.2022", endDate: "19.11.2022", status: "Yazarda" },
-        { title: "Sağlıklı bir yaşam için günlük su miktarı nedir?", startDate: "12.11.2022", endDate: "19.11.2022", status: "Editörde" },
-        { title: "Pasta yiyerek zayıflayabilir miyim?", startDate: "12.11.2022", endDate: "19.11.2022", status: "Teslim edildi" },
-    ]
+  
 
 
     return (

@@ -15,7 +15,6 @@ import BrandTitle from './BrandTitle';
 const BrandsDetail = () => {
     const { authors, setAuthors, editors } = useSiteContext()
 
-    let titleId;
     const [imgURL_, setImgURL_] = useState();
     const [tph, setTph] = useState(false);
     const [tph_, setTph_] = useState(false)
@@ -35,8 +34,6 @@ const BrandsDetail = () => {
     const [selectStatus, setSelectStatus] = useState();
 
     const removeTitleFromDb = (id) => {
-        titleId = id;
-        console.log(titleId);
         setTph(current => !current)
     }
 
@@ -438,7 +435,7 @@ const BrandsDetail = () => {
                             </thead>
                             <tbody>
                                 {titleDetails?.map((title) => (
-                                    <BrandTitle />
+                                    <BrandTitle title={title} />
                                 ))}
 
                             </tbody>

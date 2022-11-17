@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Button, Col, Row, Label, Input } from 'reactstrap';
 
-const BrandTitle = () => {
+const BrandTitle = (title) => {
+
+    const [tph, setTph] = useState(false);
+    const removeTitleFromDb = (id) => {
+        setTph(current => !current)
+    }
+
+    const toggleHandle = () => {
+        setTph(current => !current)
+    }
+
+    const removeTitleFromDb_ = (id) => {
+        console.log(localStorage.getItem("brandId") + " " + id + " ")
+        //db.collection("brands").doc(localStorage.getItem("brandId")).collection("titles").doc(id).delete();
+        //setTph(current => !current)
+    }
+
     return (
         <tr key={title.id} className="brand-title-table">
             <td>{title.title}</td>
@@ -20,7 +37,7 @@ const BrandTitle = () => {
                                 color="success"
                                 outline
                                 className="float-end"
-                                onClick={(e) => removeTitleFromDb_(titleId)}
+                                onClick={(e) => removeTitleFromDb_(title.id)}
                             >
                                 Sil
                             </Button>

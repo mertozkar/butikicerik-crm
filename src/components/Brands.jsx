@@ -203,7 +203,7 @@ const Brands = () => {
             </Row>
             <Row>
                 {brands.filter((brands) => brands.brandName.toLowerCase().includes(patSearch)).map((brands, index) => (
-                    <Col lg="4" xl="4">
+                    <Col key={index} lg="4" xl="4">
                         <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4 mt-5">
                             <img src={brands.imgURL == "" ? defaultLogo : brands.imgURL} width="auto" height="25" />
                             <div className="ms-3">

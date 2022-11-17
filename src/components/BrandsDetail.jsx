@@ -435,7 +435,9 @@ const BrandsDetail = () => {
                             </thead>
                             <tbody>
                                 {titleDetails?.map((title) => (
-                                    <BrandTitle title={title} />
+
+                                    <BrandTitle title={title.title} id={title.id} />
+
                                 ))}
 
                             </tbody>

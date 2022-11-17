@@ -67,7 +67,7 @@ const AdminHome = () => {
                             </tr>
                         </thead>
                         {brands.map(brand => (
-                            <tbody>
+                            <tbody key={brand.id}>
                                 <tr>
                                     <td>{brand.brandName}</td>
                                     <td> {brand.serviceType} İçeriği </td>

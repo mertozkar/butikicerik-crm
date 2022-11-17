@@ -38,6 +38,10 @@ const EditorDetail = () => {
         setTph_(current => !current)
     }
 
+    const postHandle = () => {
+
+    }
+
     const year = titleStart?.split("-")[0]
     const month = titleStart?.split("-")[1]
     const day = titleStart?.split("-")[2]
@@ -263,27 +267,7 @@ const EditorDetail = () => {
                 <div className="row g-4">
                     <div className="col-sm-6 col-xl-3">
                         <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <div className="ms-3">
-                                {brandDetails && brandDetails[0].imgURL === "" ? <div> {isLoading ? <Loader /> : (<>
-                                    {!imageAsset ? (<>
-                                        <label className='w-full h-full flex flex-col items-center justify-center cursor-pointer'>
-                                            <div className='w-full h-full flex flex-col items-center justify-center cursor-pointer gap-2'>
-                                                <MdCloudUpload className='text-gray-500 text-3xl hover:text-gray-700' />
-                                                <p className='text-gray-500 text-xl'> Görsel yükle</p>
-                                            </div>
-                                            <input type="file" name="uploadimage" accept='image/*' onChange={uploadImage} className='w-0 h-0 ' />
-                                        </label>
-                                    </>) :
-                                        (<> <div className='relative h-20 '>
-                                            <img src={imageAsset} alt="uploaded image" style={{ width: 200 }} />
-                                            <button type='button' className='absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md duration-500 transition-all' onClick={deleteImage}>
-                                                <MdDelete className='text-white' />
-                                            </button>
-                                        </div>
-                                        </>)}
-                                </>)}
-                                    <Button onClick={uploadLogo} > Logoyu Kaydet </Button></div> : <div><Button onClick={deleteLogo}> <img src={brandDetails && brandDetails[0].imgURL} width="50" /></Button></div>}
-                            </div>
+                            <p>Editör adı</p>
                         </div>
                     </div>
                     <div className="col-sm-6 col-xl-3">
@@ -449,14 +433,15 @@ const EditorDetail = () => {
                             </thead>
                             <tbody>
                                 {titleDetails?.map((title) => (
-                                    <tr key={title.id}>
-                                        <td>{title.title}</td>
+                                    <tr key={title.id} >
+                                        <td onClick={postHandle} className="pointer">{title.title}</td>
                                         <td>{title.author}</td>
                                         <td>{title.editor}</td>
                                         <td>{title.startDate}</td>
                                         <td>{title.endDate}</td>
                                         <td>{title.status}</td>
                                     </tr>
+                                    // {titleDetail}
                                 ))}
 
                             </tbody>

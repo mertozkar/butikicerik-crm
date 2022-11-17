@@ -14,6 +14,18 @@
     z-index: 99;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
+.float-menu {
+    right: 30px;
+    bottom: 50px;
+    margin-right: 2rem;
+    color: white;
+    position: fixed;
+
+}
 
 /*** Spinner ***/
 #spinner {

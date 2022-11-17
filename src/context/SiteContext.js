@@ -15,6 +15,17 @@ const SiteProvider = ({ children }) => {
   const [editors, setEditors] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [customers, setCustomers] = useState([]);
+  const [menuToggle, setMenuToggle] = useState(false);
+
+  const toggleHandle = () => {
+    setMenuToggle(current => !current)
+  }
+
+  const dummyContents = [
+    { title: "Mineraller neden bu kadar önemli?", startDate: "12.11.2022", endDate: "19.11.2022", status: "Yazarda" },
+    { title: "Sağlıklı bir yaşam için günlük su miktarı nedir?", startDate: "12.11.2022", endDate: "19.11.2022", status: "Editörde" },
+    { title: "Pasta yiyerek zayıflayabilir miyim?", startDate: "12.11.2022", endDate: "19.11.2022", status: "Teslim edildi" },
+  ]
 
   useEffect(() => {
     db.collection("brands").onSnapshot(snapshot => (
@@ -103,6 +114,10 @@ const SiteProvider = ({ children }) => {
     setAuthors,
     customers,
     setCustomers,
+    dummyContents,
+    menuToggle,
+    setMenuToggle,
+    toggleHandle
   }
 
   return (

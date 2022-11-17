@@ -9,10 +9,16 @@ import { useSiteContext } from '../context/SiteContext';
 const Navbar = () => {
     const [isActive, setIsActive] = useState();
 
-    const { profile } = useSiteContext();
+    const { profile, setMenuToggle, menuToggle, toggleHandle } = useSiteContext();
+
+
+
 
     return (
-        <div className="sidebar pe-4 pb-3">
+        <div className={classNames({
+            "sidebar pe-4 pb-3": true,
+            "open": menuToggle,
+        })} >
             <nav className="navbar bg-secondary navbar-dark">
                 <div className="navbar-brand mx-4 mb-3">
                     <img src={Logo} width="200" />

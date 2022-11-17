@@ -12,9 +12,9 @@ import { nanoid } from 'nanoid'
 
 
 const BrandsDetail = () => {
-
     const { authors, setAuthors, editors } = useSiteContext()
 
+    let titleId;
     const [imgURL_, setImgURL_] = useState();
     const [tph, setTph] = useState(false);
     const [tph_, setTph_] = useState(false)
@@ -33,7 +33,9 @@ const BrandsDetail = () => {
     const [titleEnd, setTitleEnd] = useState();
     const [selectStatus, setSelectStatus] = useState();
 
-    const removeTitleFromDb = () => {
+    const removeTitleFromDb = (id) => {
+        titleId = id;
+        console.log(titleId);
         setTph(current => !current)
     }
 
@@ -42,8 +44,9 @@ const BrandsDetail = () => {
     }
 
     const removeTitleFromDb_ = (id) => {
-        console.log(localStorage.getItem("brandId") + " " + id)
-        //db.collection("brands/").doc(localStorage.getItem("brandId")).collection("titles/").doc(id).delete();
+        console.log(localStorage.getItem("brandId") + " " + id + " ")
+        //db.collection("brands").doc(localStorage.getItem("brandId")).collection("titles").doc(id).delete();
+        //setTph(current => !current)
     }
 
     const addTitlePopup = () => {
@@ -441,7 +444,7 @@ const BrandsDetail = () => {
                                         <td>{title.startDate}</td>
                                         <td>{title.endDate}</td>
                                         <td>{title.status}</td>
-                                        <td><button type="button" class="btn btn-danger m-2" onClick={removeTitleFromDb}>Sil</button></td>
+                                        <td><button type="button" class="btn btn-danger m-2" onClick={(e) => removeTitleFromDb(title.id)}>Sil</button></td>
                                         {tph && <div className="popup-box">
                                             <div className="box">
                                                 <span className="close-icon" onClick={toggleHandle}>x</span>
@@ -452,7 +455,7 @@ const BrandsDetail = () => {
                                                             color="success"
                                                             outline
                                                             className="float-end"
-                                                            onClick={removeTitleFromDb_(title.id)}
+                                                            onClick={(e) => removeTitleFromDb_(titleId)}
                                                         >
                                                             Sil
                                                         </Button>

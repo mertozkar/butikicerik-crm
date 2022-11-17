@@ -20,9 +20,6 @@ const Navbar = () => {
             "open": menuToggle,
         })} >
             <nav className="navbar bg-secondary navbar-dark">
-                <div className="navbar-brand mx-4 mb-3">
-                    <img src={Logo} width="200" />
-                </div>
                 <div className="navbar-nav w-100">
                     <Link to={"/"} className={classNames({
                         "nav-item nav-link pb-3 pt-3": true,

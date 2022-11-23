@@ -1,13 +1,23 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import { Input } from 'reactstrap'
+import { Button, Input } from 'reactstrap'
 import { useSiteContext } from '../context/SiteContext'
+
+import data from '../veri1.json'
 
 const AdminHome = () => {
 
     const { brands } = useSiteContext();
 
     const [visibleDetail, setVisibleDetail] = useState(false)
+
+    const dataHandler = () => {
+        // console.log(data.editors[0])
+        data.editors[0].age = 30;
+        console.log(data.editors[0])
+
+    }
+    console.log(data.editors[0])
 
     return (
         < div className="container-fluid pt-4 px-4" >
@@ -37,6 +47,7 @@ const AdminHome = () => {
                         </div>
                     </div>
                 </div>
+                <Button onClick={dataHandler}> Veriyi değiştir.</Button>
                 <div className="col-sm-6 col-xl-3">
                     <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                         <i className="fa fa-chart-area fa-3x text-primary"></i>
@@ -77,13 +88,13 @@ const AdminHome = () => {
                                     <td> {brand.serviceStart} </td>
                                     <td>{brand.serviceEnd}</td>
                                     <td><Link to={"/brand-details"} className="btn btn-sm btn-primary" type="button" onClick={() => localStorage.setItem("brandId", brand.brandId)}> Detaylar </Link></td>
-                                    {/* <td> <button className="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
+                                    <td> <button className="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseOne" aria-expanded="true"
                                         aria-controls="collapseOne" onClick={() => setVisibleDetail(current => !current)}>
                                         Detail
-                                    </button></td> */}
+                                    </button></td>
                                 </tr>
-                                {/* {visibleDetail &&
+                                {visibleDetail &&
                                     <tr>
                                         <td colSpan={8}>
                                             <div className="bg-secondary rounded h-100 mb-0">
@@ -137,7 +148,7 @@ const AdminHome = () => {
                                             </div>
                                         </td>
                                     </tr>
-                                } */}
+                                }
                             </tbody>
                         ))}
                     </table>

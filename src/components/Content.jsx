@@ -12,6 +12,7 @@ import SignUp from './SignUp';
 import Login from './Login';
 import AdminHome from './AdminHome';
 import Brands from './Brands';
+import Posts from './Posts';
 
 const Content = () => {
 
@@ -33,6 +34,7 @@ const Content = () => {
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/brand-details" element={<BrandsDetail />} />
                 <Route path='/editor-details' element={<EditorDetail />} />
+                <Route path='/posts' element={<Posts />} />
             </Routes>
         </div>
     )
